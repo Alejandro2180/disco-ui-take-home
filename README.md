@@ -29,7 +29,9 @@ Components that have already been implemented that you will be using in this exe
 - [`IssueCredentialForm`](src/components/credentials/IssueCredentialForm.tsx) - this is a controlled component that receives a credential object, displays form fields to edit it, and sends updates to its parent component via `props.onChange`. Example usage in [`IssueCredentialForm.stories.tsx`](src/components/credentials/IssueCredentialForm.stories.tsx)
 - Feel free to use any of the other components in this repo, all of which have Storybook files (`*.stories.tsx`) demonstrating their usage
 
-Please let us know if there are any technical issues with the assignment (e.g. build or environment issues). This repo was built and tested with Node v16.14.0 and Yarn v1.22.18
+Please let us know if there are any technical issues with the assignment (e.g. build or environment issues). This repo was built and tested with Node v16.14.0 and Yarn v1.22.18.
+
+If you prefer to use an in-browser dev environment and IDE instead of setting it up on your system, please see the "Using an in-browser development environment" section below. This may be especially useful on Windows, which can be trickier for setting up the environment locally.
 
 ## Instructions
 
@@ -68,3 +70,30 @@ Please fork this repo, commit your implementation, and email us a link at career
 - Feel free to tweak any components as needed or create new ones, but it is possible to complete the assignment with only code in [`IssueCredentialFlow.tsx`](src/components/credentials/IssueCredentialFlow.tsx) and [`Success.tsx`](src/components/Success.tsx)
 - The codebase is in TypeScript, which should be perfectly readable even without any experience in TS. You are welcome however to write your code in JS. To do so, please check out the `javascript` branch of this repo, in which you will find JSX versions of the components you will be editing (`IssueCredentialFlow.jsx` and `Success.jsx`)
 - Feel free to ask any clarifying questions about the assignment. However, you have total leeway in how you wish to implement this, and can make arbitrary decisions and assumptions. If you do, note them down and let us know!
+
+### Using an in-browser development environment
+
+To avoid any local development environment issues, you can use an in-browser environment and IDE to complete this assignment, using [AWS Cloud9](https://aws.amazon.com/cloud9/).
+
+Note that this will require a credit card, and will cost $0.02 per hour of usage.
+
+- Sign up for Amazon AWS from the above link
+  - If this is a new account, you may receive an email saying that it can take up to 24 hours for some services to work. Cloud9, however, should work right away
+- Set up a Cloud9 environment using all of the default settings _except_ that during Step 2 (Configure settings), change the instance type to "t3.small"
+  - The default t2.micro free tier instance type unfortunately doesn't have enough RAM to reliably run Storybook, but t3.small costs only $0.02/hour
+- Once the IDE is up and running, run the following commands:
+
+```
+git clone https://github.com/discoxyz/disco-ui-take-home.git # NOTE replace with URL of your fork
+cd disco-ui-take-home
+git checkout cloud9
+npm install -g yarn
+yarn install
+yarn storybook
+```
+
+Once it finishes running, go to the Preview menu and select Preview Running Application, and should just work!
+
+If you'd like to view the preview in a separate tab, you can click in the URL bar of the Cloud9 browser and get a URL that you can view from anywhere.
+
+_Note_: When you are finished with the assignment, make sure that you delete your Cloud9 environment, or else the EBS storage volume behind it will remain active. EBS storage is free under the 1-year AWS free tier, but if/when that runs out you may be charged $1/month for the EBS volume.
