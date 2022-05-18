@@ -21,7 +21,7 @@
     "server:start": "react-scripts start",
     "server:build": "react-scripts build",
     "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 9009 -s public",
+    "storybook": "start-storybook -p 8080 -s public",
     "build-storybook": "build-storybook -s public"
   },
   "dependencies": {
