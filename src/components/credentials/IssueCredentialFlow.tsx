@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, CircularProgress } from "@mui/material";
 
 import { VC, Profile } from "../../types";
 import { IssueCredentialForm } from "./IssueCredentialForm";
@@ -21,19 +21,87 @@ export interface IssueCredentialFlowProps {
 }
 
 export const IssueCredentialFlow: React.FC<IssueCredentialFlowProps> = (props) => {
+  // State variables
   const [cred, setCred] = React.useState(props.initialCredential);
+  const [step, setStep] = React.useState(1); // Steps available: 1-3
+  const [loading, setLoading] = React.useState(false);
 
-  return (
-    <Box>
-      <Typography variant="h6">Issue Kudos Credential</Typography>
+  // Signs VC & progresses to next step when complete
+  const issueCredential = (vc: VC) => {
+    setLoading(true);
+    signVc(vc).then(() => {
+      setLoading(false);
+      setStep(3)
+    });
+  }
+
+  // Renders content based on the current step
+  const renderContent = () => {
+    if(step == 1){
+      return (
+        <div>
+          <Typography variant="h6">Issue Kudos Credential</Typography>
+
+          <Typography variant="body1" sx={{ marginBottom: "16px" }}>
+            Fill out the credential details
+          </Typography>
+
+          <IssueCredentialForm cred={cred} onChange={setCred}/>
+
+          <DiscoButton
+            style={{maxWidth: "400px"}}
+            onClick={() => {
+            setCred(cred);
+            setStep(2)
+            }}
+          >
+            Review
+          </DiscoButton>
+        </div>
+      )
+    }
+    if(step == 2){
+      return (
+      <div>
+      <Typography variant="h6">Review Credential</Typography>
 
       <Typography variant="body1" sx={{ marginBottom: "16px" }}>
-        This is your component! Please edit it for this exercise as you see fit.
+        Make sure all the information is correct
       </Typography>
 
-      <IssueCredentialForm cred={cred} onChange={setCred} />
+      <Credential cred={cred} />
+      <br/>
+      <DiscoButton 
+        onClick={() => 
+        issueCredential(cred)
+        }
+      >
+        {loading && (
+          <CircularProgress />
+        )}
+        {!loading && (<p>Issue Credential</p>)}
+      </DiscoButton>
+    </div>
+      )
+    }
+    if(step == 3){
+      return (
+        <div>
+        <Success recipient={props.recipient}></Success>
+        <br/>
+        <DiscoButton 
+          onClick={() => setStep(1)} // For sake of assignment, reset back to first step
+        >
+          Close
+        </DiscoButton>
+        </div>
+      )
+    }
+  }
 
-      <DiscoButton onClick={() => console.log("clicked! VC:", cred, "recipient:", props.recipient)}>Review</DiscoButton>
+  return (
+    <Box sx={{textAlign: "center"}}>
+      {renderContent()}
     </Box>
   );
 };

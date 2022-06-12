@@ -13,4 +13,5 @@ export const DiscoButton = styled(Button)<ButtonProps>(({ disabled }) => ({
   textTransform: "none",
   fontWeight: 600,
   padding: "8px 16px",
+  width: "400px",
 }));

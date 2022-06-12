@@ -34,6 +34,8 @@ export const Credential: React.FC<{ cred: VC }> = ({ cred }) => {
         maxWidth: "480px",
         overflow: "hidden",
         width: "100%",
+        textAlign: "start",
+        marginInline: "auto"
       }}
     >
       <CredentialHeader>
@@ -68,7 +70,7 @@ export const Credential: React.FC<{ cred: VC }> = ({ cred }) => {
               <CredentialDid did={issuer} />
             </CredentialFieldItem>
             <CredentialFieldItem>
-              <CredentialFieldLabel>Subject</CredentialFieldLabel>
+              <CredentialFieldLabel>Recipient DID</CredentialFieldLabel>
               <CredentialDid did={cred.credentialSubject.id} />
             </CredentialFieldItem>
             <CredentialFieldItem>

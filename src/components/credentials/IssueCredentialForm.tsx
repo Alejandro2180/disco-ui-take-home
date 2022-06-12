@@ -2,11 +2,10 @@ import * as React from "react";
 import { Box, FormControl, TextField, Typography } from "@mui/material";
 
 import { VC } from "../../types";
-import { dateTimeFormat, isoToDatetimeLocal } from "../../utils/";
 
 export const IssueCredentialForm: React.FC<{ cred: VC; onChange(newValue: VC): void }> = ({ cred, onChange }) => {
   return (
-    <Box sx={{ maxWidth: "400px" }}>
+    <Box sx={{ maxWidth: "400px", marginInline: "auto"}}>
       <FormControl fullWidth sx={{ marginBottom: 3 }}>
         <Typography variant="body2">Recipient DID</Typography>
         <TextField
